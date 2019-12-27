@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  InternetsViewController.swift
 //  BRChallenge
 //
 //  Created by Vanja Ruzic on 27/12/2019.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class InternetsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
-
