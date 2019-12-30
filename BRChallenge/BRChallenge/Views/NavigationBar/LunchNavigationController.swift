@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MapKit
 
 protocol NavigationRightButtonProtocol: AnyObject {
-    func mapButtonTapped(navigationController: UINavigationController) -> String
+    func mapButtonTapped(navigationController: UINavigationController) -> [CLLocation]
 }
 
 class LunchNavigationController: BRNavigationController {
@@ -26,10 +27,10 @@ class LunchNavigationController: BRNavigationController {
     }
     
     @objc func mapTapped() {
-        let dummyText = navigationRightButtonDelegate?.mapButtonTapped(navigationController: self) ?? ""
+        let locations = navigationRightButtonDelegate?.mapButtonTapped(navigationController: self) ?? [CLLocation]()
         
         guard let addTripViewController = storyboard?.instantiateViewController(identifier: MapViewController.storyboardIdentifier, creator: { coder in
-            return MapViewController(coder: coder, dummyTestString: dummyText)
+            return MapViewController(coder: coder, locations: locations)
         }) else {
             fatalError("Failed to load MapViewController from storyboard.")
         }

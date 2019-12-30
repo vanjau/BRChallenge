@@ -7,30 +7,37 @@
 //
 
 import UIKit
+import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     // MARK: - Properties
 
-    @IBOutlet weak var dummyTestLabel: UILabel!
-    var dummyTestString: String
+    @IBOutlet weak var mapView: MKMapView!
+    fileprivate var locationArray: [CLLocation]
     
     // MARK: - Init
     
-    init?(coder: NSCoder, dummyTestString: String) {
-        self.dummyTestString = dummyTestString
+    init?(coder: NSCoder, locations: [CLLocation]) {
+        self.locationArray = locations
         super.init(coder: coder)
     }
 
     required init?(coder: NSCoder) {
-        fatalError("You must create this view controller with a selectedContinent.")
+        fatalError("You must create this view controller with a locations.")
     }
     
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dummyTestLabel.text = dummyTestString
+        mapView.delegate = self
+        
+        let annotations = locationArray.map { location -> MKAnnotation in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location.coordinate
+            return annotation
+        }
+        mapView.showAnnotations(annotations, animated: false)
     }
 }

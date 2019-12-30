@@ -19,7 +19,14 @@ class InternetsViewController: UIViewController {
         
         return view
     }()
-    fileprivate var activityIndicator: UIActivityIndicatorView!
+    lazy fileprivate var activityIndicator: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.center = view.center
+        spinner.hidesWhenStopped = true
+        spinner.style = UIActivityIndicatorView.Style.medium
+        
+        return spinner
+    }()
     
     // MARK: - Lifecycle
 
@@ -28,13 +35,6 @@ class InternetsViewController: UIViewController {
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)
-        
-        activityIndicator = UIActivityIndicatorView()
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
-        
-
         
         webView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
