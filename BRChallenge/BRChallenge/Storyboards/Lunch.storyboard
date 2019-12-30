@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wgc-sl-8X9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wgc-sl-8X9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,24 +16,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMj-oC-pkl">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cMs-56-BdF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="TZP-bB-Jdj">
+                                    <size key="itemSize" width="267" height="192"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RestaurantCollectionViewCell" id="mga-bb-lJV" customClass="RestaurantCollectionViewCell" customModule="BRChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="73.5" y="0.0" width="267" height="192"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bLv-NS-uAf">
+                                            <rect key="frame" x="0.0" y="0.0" width="267" height="192"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="customSize" width="267" height="192"/>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <segue destination="Wt4-L4-jb3" kind="show" id="799-qV-MBn"/>
+                                    <outlet property="dataSource" destination="Mr2-Oi-4uL" id="gh1-s8-Jnq"/>
+                                    <outlet property="delegate" destination="Mr2-Oi-4uL" id="YjO-xZ-MZy"/>
                                 </connections>
-                            </button>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bMj-oC-pkl" firstAttribute="centerX" secondItem="gIa-GX-1of" secondAttribute="centerX" id="KiS-ga-0no"/>
-                            <constraint firstItem="bMj-oC-pkl" firstAttribute="centerY" secondItem="gIa-GX-1of" secondAttribute="centerY" id="eDJ-BS-th8"/>
+                            <constraint firstItem="CjJ-cd-Z9B" firstAttribute="bottom" secondItem="cMs-56-BdF" secondAttribute="bottom" id="fSz-JF-TfG"/>
+                            <constraint firstItem="cMs-56-BdF" firstAttribute="top" secondItem="CjJ-cd-Z9B" secondAttribute="top" id="haS-77-J6k"/>
+                            <constraint firstItem="CjJ-cd-Z9B" firstAttribute="trailing" secondItem="cMs-56-BdF" secondAttribute="trailing" id="i8r-80-aU7"/>
+                            <constraint firstItem="cMs-56-BdF" firstAttribute="leading" secondItem="CjJ-cd-Z9B" secondAttribute="leading" id="z1P-Xg-qOz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CjJ-cd-Z9B"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Lunch" image="tab_lunch" id="iZj-f2-RLB"/>
                     <navigationItem key="navigationItem" id="r0j-nv-6Ee"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="restaurantsCollectionView" destination="cMs-56-BdF" id="ZIo-Re-lDV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k9j-WE-i0G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -68,11 +93,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qO0-wa-BIW">
+                                <rect key="frame" x="0.0" y="152" width="414" height="744"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="qO0-wa-BIW" firstAttribute="leading" secondItem="20H-Yb-c9D" secondAttribute="leading" id="8eW-5B-7DM"/>
+                            <constraint firstItem="qO0-wa-BIW" firstAttribute="top" secondItem="20H-Yb-c9D" secondAttribute="top" constant="108" id="AxR-vC-s1c"/>
                             <constraint firstItem="F9G-U2-hc7" firstAttribute="centerY" secondItem="wgf-SS-ng6" secondAttribute="centerY" id="NyZ-UG-1rh"/>
+                            <constraint firstAttribute="bottom" secondItem="qO0-wa-BIW" secondAttribute="bottom" id="RFF-OF-UXF"/>
                             <constraint firstItem="F9G-U2-hc7" firstAttribute="centerX" secondItem="wgf-SS-ng6" secondAttribute="centerX" id="S48-Wp-mrl"/>
+                            <constraint firstItem="20H-Yb-c9D" firstAttribute="trailing" secondItem="qO0-wa-BIW" secondAttribute="trailing" id="qRn-08-WMy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="20H-Yb-c9D"/>
                     </view>
@@ -82,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Udl-Dh-JQR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2974" y="139"/>
+            <point key="canvasLocation" x="2973.913043478261" y="138.61607142857142"/>
         </scene>
         <!--Lunch Navigation Controller-->
         <scene sceneID="Gqk-4g-q7m">

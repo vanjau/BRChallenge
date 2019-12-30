@@ -16,3 +16,11 @@ extension UIViewController {
         return String(describing: self)
     }
 }
+
+// MARK: - UICollectionViewCell
+
+extension UICollectionViewCell {
+    static internal var cellIdentifier: String {
+        return String(describing: self)
+    }
+}
