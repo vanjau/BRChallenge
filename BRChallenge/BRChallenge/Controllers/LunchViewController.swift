@@ -55,6 +55,10 @@ class LunchViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        restaurantsCollectionView.collectionViewLayout.invalidateLayout()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -76,8 +80,9 @@ extension LunchViewController: UICollectionViewDataSource {
 
 extension LunchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let restaurant = restaurantArray?[indexPath.item] ?? Restaurant()
         guard let mapVC = storyboard?.instantiateViewController(identifier: RestaurantDetailsViewController.storyboardIdentifier, creator: { coder in
-            return RestaurantDetailsViewController(coder: coder, restaurant: (self.restaurantArray?[indexPath.item])!)
+            return RestaurantDetailsViewController(coder: coder, restaurant: restaurant)
          }) else {
              fatalError("Failed to load MapViewController from storyboard.")
          }

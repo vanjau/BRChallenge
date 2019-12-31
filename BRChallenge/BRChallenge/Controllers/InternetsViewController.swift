@@ -28,6 +28,9 @@ class InternetsViewController: UIViewController {
         return spinner
     }()
     
+    var progressView: UIProgressView!
+
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -48,22 +51,44 @@ class InternetsViewController: UIViewController {
         
         let request = URLRequest(url: url)
         webView.load(request)
+        
+        
+        
+        progressView = UIProgressView(progressViewStyle: .default)
+        progressView.sizeToFit()
+        let progressButton = UIBarButtonItem(customView: progressView)
+
+        toolbarItems = [progressButton]
+        navigationController?.isToolbarHidden = false
+        
+        
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+
     }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            progressView.progress = Float(webView.estimatedProgress)
+        }
+    }
+
+    
+    
 }
 
 // MARK - WKNavigationDelegate
 
 extension InternetsViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.stopAnimating()
+        navigationController?.isToolbarHidden = true
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        activityIndicator.startAnimating()
+        navigationController?.isToolbarHidden = false
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        activityIndicator.stopAnimating()
+        navigationController?.isToolbarHidden = true
     }
 }
 

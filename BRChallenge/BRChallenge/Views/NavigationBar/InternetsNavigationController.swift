@@ -19,6 +19,11 @@ class InternetsNavigationController: BRNavigationController {
 
     public weak var internetsNavigationDelegate: InternetsNavigationDelegate?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+
+    }
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         self.internetsNavigationDelegate = viewController as? InternetsNavigationDelegate

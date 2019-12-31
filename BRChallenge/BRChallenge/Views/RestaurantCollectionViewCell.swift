@@ -10,7 +10,7 @@ import UIKit
 
 class RestaurantCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var restaurantPhotoImageView: UIImageView!
+    @IBOutlet weak var restaurantPhotoImageView: CachedImageView!
     @IBOutlet weak var restaurantInfoView: RestaurantInfoContainerView!
     
     public var restaurant: Restaurant? {
@@ -20,8 +20,8 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
                 return
             }
             
-            restaurantPhotoImageView.load(url: restaurantUrl)
-            
+//            restaurantPhotoImageView.load(url: restaurantUrl)
+            restaurantPhotoImageView.loadImage(urlString: restaurantUrlString)
             restaurantInfoView.titleLabel.text = restaurant?.name
             restaurantInfoView.subtitleLabel.text = restaurant?.category
         }
