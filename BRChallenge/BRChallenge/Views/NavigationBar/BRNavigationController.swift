@@ -24,6 +24,4 @@ class BRNavigationController: UINavigationController, UINavigationControllerDele
           
         UINavigationBar.appearance().standardAppearance = standard
     }
-    
-
 }

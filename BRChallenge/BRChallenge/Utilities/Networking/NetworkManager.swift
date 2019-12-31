@@ -9,28 +9,28 @@
 import Foundation
 
 enum RestaurantError: Error {
-    case noDataAvailable
+    case urlFailure
     case canNotProcessData
 }
 
 struct NetworkManager {
-    let baseURL = "https://s3.amazonaws.com/br-codingexams/restaurants.json"
-    let versionURL = ""
+    let baseURL = "https://s3.amazonaws.com/br-codingexams/"
+    let versionURL = "restaurants.json"
     private let session: URLSessionProtocol
     
     init(session: URLSessionProtocol) {
         self.session = session
     }
     
-    func get(url: String, callback: @escaping(Result<Data, RestaurantError>) -> Void ) {
-        guard let link = URL(string: url) else {
-            callback(.failure(.noDataAvailable))
+    func get(withEndpoitString: String, callback: @escaping(Result<Data, RestaurantError>) -> Void ) {
+        guard let link = URL(string: baseURL + withEndpoitString) else {
+            callback(.failure(.urlFailure))
             return
         }
         let req = URLRequest(url: link)
         let task = session.dataTask(with: req) { (data, response, error) in
             guard let jsonData = data else {
-                callback(.failure(.noDataAvailable))
+                callback(.failure(.canNotProcessData))
                 return
             }
             callback(.success(jsonData))

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 protocol InternetsNavigationDelegate: AnyObject {
     func didTapBackButton(_ withNavigationController: InternetsNavigationController)
@@ -16,14 +17,7 @@ protocol InternetsNavigationDelegate: AnyObject {
 
 class InternetsNavigationController: BRNavigationController {
 
-
     public weak var internetsNavigationDelegate: InternetsNavigationDelegate?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-
-    }
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         self.internetsNavigationDelegate = viewController as? InternetsNavigationDelegate

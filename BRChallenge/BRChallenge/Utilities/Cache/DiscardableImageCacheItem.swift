@@ -7,10 +7,9 @@
 //
 
 import Foundation
-
 import UIKit
 
-open class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
+class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
     
     private(set) public var image: UIImage?
     var accessCount: UInt = 0
@@ -43,5 +42,4 @@ open class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
     public func isContentDiscarded() -> Bool {
         return image == nil
     }
-    
 }

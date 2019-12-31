@@ -16,11 +16,6 @@ class RestaurantCollectionViewCell: UICollectionViewCell {
     public var restaurant: Restaurant? {
         didSet {
             let restaurantUrlString = restaurant?.backgroundImageURL ?? ""
-            guard let restaurantUrl = URL(string: restaurantUrlString) else {
-                return
-            }
-            
-//            restaurantPhotoImageView.load(url: restaurantUrl)
             restaurantPhotoImageView.loadImage(urlString: restaurantUrlString)
             restaurantInfoView.titleLabel.text = restaurant?.name
             restaurantInfoView.subtitleLabel.text = restaurant?.category

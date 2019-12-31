@@ -31,11 +31,11 @@ class LunchViewController: UIViewController {
     
     
     func network() {
-        let url = "https://s3.amazonaws.com/br-codingexams/restaurants.json"
+        let endpointString = "restaurants.json"
         let session = URLSession.shared
         let client = NetworkManager(session: session)
         
-        client.get(url: url) { [weak self] result in
+        client.get(withEndpoitString: endpointString) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -111,7 +111,7 @@ extension LunchViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - NavigationRightButtonProtocol
 
 extension LunchViewController: NavigationRightButtonProtocol {
-    func mapButtonTapped(navigationController: UINavigationController) -> [CLLocation] {
+    func didTapMapButton(navigationController: UINavigationController) -> [CLLocation] {
         
         var locations = [CLLocation]()
 

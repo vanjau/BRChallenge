@@ -10,13 +10,12 @@ import UIKit
 import MapKit
 
 protocol NavigationRightButtonProtocol: AnyObject {
-    func mapButtonTapped(navigationController: UINavigationController) -> [CLLocation]
+    func didTapMapButton(navigationController: UINavigationController) -> [CLLocation]
 }
 
 class LunchNavigationController: BRNavigationController {
 
     public weak var navigationRightButtonDelegate: NavigationRightButtonProtocol?
-        
 
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         self.navigationRightButtonDelegate = viewController as? NavigationRightButtonProtocol
@@ -27,7 +26,7 @@ class LunchNavigationController: BRNavigationController {
     }
     
     @objc func mapTapped() {
-        let locations = navigationRightButtonDelegate?.mapButtonTapped(navigationController: self) ?? [CLLocation]()
+        let locations = navigationRightButtonDelegate?.didTapMapButton(navigationController: self) ?? [CLLocation]()
         
         guard let addTripViewController = storyboard?.instantiateViewController(identifier: MapViewController.storyboardIdentifier, creator: { coder in
             return MapViewController(coder: coder, locations: locations)
