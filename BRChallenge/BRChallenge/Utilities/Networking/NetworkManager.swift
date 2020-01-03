@@ -9,32 +9,39 @@
 import Foundation
 
 enum RestaurantError: Error {
+    case noInternetConnection
     case urlFailure
     case canNotProcessData
 }
 
+typealias RestaurantResult = Result<Data, RestaurantError>
+
 struct NetworkManager {
-    let baseURL = "https://s3.amazonaws.com/br-codingexams/"
-    let versionURL = "restaurants.json"
     private let session: URLSessionProtocol
     
-    init(session: URLSessionProtocol) {
+    public init(session: URLSessionProtocol) {
         self.session = session
     }
     
-    func get(withEndpoitString: String, callback: @escaping(Result<Data, RestaurantError>) -> Void ) {
-        guard let link = URL(string: baseURL + withEndpoitString) else {
-            callback(.failure(.urlFailure))
-            return
-        }
-        let req = URLRequest(url: link)
-        let task = session.dataTask(with: req) { (data, response, error) in
-            guard let jsonData = data else {
-                callback(.failure(.canNotProcessData))
-                return
+    public func get(withUrlString urlString: String, callback: @escaping (RestaurantResult) -> Void ) {
+        NetworkReachability.isReachable { reachable in
+            if !reachable {
+                callback(.failure(.noInternetConnection))
+            } else {
+                guard let link = URL(string: urlString) else {
+                    callback(.failure(.urlFailure))
+                    return
+                }
+                let req = URLRequest(url: link)
+                let task = self.session.dataTask(with: req) { (data, response, error) in
+                    guard let jsonData = data else {
+                        callback(.failure(.canNotProcessData))
+                        return
+                    }
+                    callback(.success(jsonData))
+                }
+                task.resume()
             }
-            callback(.success(jsonData))
         }
-        task.resume()
     }
 }

@@ -9,17 +9,17 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
 
     // MARK: - Properties
 
-    @IBOutlet weak var mapView: MKMapView!
-    fileprivate var locationArray: [CLLocation]
+    @IBOutlet weak var mapView: BRMapView!
+    fileprivate var restaurantsArray: [Restaurant]
     
     // MARK: - Init
     
-    init?(coder: NSCoder, locations: [CLLocation]) {
-        self.locationArray = locations
+    init?(coder: NSCoder, restaurants: [Restaurant]) {
+        self.restaurantsArray = restaurants
         super.init(coder: coder)
     }
 
@@ -31,13 +31,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
-        
-        let annotations = locationArray.map { location -> MKAnnotation in
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location.coordinate
-            return annotation
-        }
-        mapView.showAnnotations(annotations, animated: false)
+        mapView.restaurantsArray = restaurantsArray
     }
 }

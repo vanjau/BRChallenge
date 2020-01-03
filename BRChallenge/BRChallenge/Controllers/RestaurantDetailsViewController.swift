@@ -9,9 +9,11 @@
 import UIKit
 import MapKit
 
-class RestaurantDetailsViewController: UIViewController, MKMapViewDelegate {
+class RestaurantDetailsViewController: UIViewController {
 
-    @IBOutlet weak var restaurantDetailsMapView: MKMapView!
+    // MARK: - Properties
+
+    @IBOutlet weak var restaurantDetailsMapView: BRMapView!
     @IBOutlet weak var restaurantInfoView: RestaurantInfoContainerView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
@@ -29,58 +31,51 @@ class RestaurantDetailsViewController: UIViewController, MKMapViewDelegate {
         fatalError("You must create this view controller with a restaurant.")
     }
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Details"
+        restaurantInfoViewSetup()
+        mapSetup()
+        restaurantContactSetup()
+    }
+    
+    // MARK: - Setup
+
+    fileprivate func mapSetup() {
+        guard let restaurant = restaurant else {
+            return
+        }
+        restaurantDetailsMapView.restaurantsArray = [restaurant]
+    }
+    
+    fileprivate func restaurantInfoViewSetup() {
         restaurantInfoView.titleLabel.text = restaurant?.name
         restaurantInfoView.subtitleLabel.text = restaurant?.category
-        
+    }
+    
+    fileprivate func restaurantContactSetup() {
         let addressString = restaurant?.location?.address ?? ""
         let cityString = restaurant?.location?.city ?? ""
         let ccString = restaurant?.location?.cc ?? ""
         let postalCodeString = restaurant?.location?.postalCode ?? ""
-
-
         let twitterString = restaurant?.contact?.twitter ?? ""
-
 
         addressLabel.text = addressString + "\n" + cityString + ", " + ccString + " " + postalCodeString
         phoneLabel.text = restaurant?.contact?.formattedPhone
         twitterHandleString.text = "@" + twitterString
-        self.navigationItem.title = "Details"
-        
-        let lat = restaurant?.location?.lat ?? 0
-        let lon = restaurant?.location?.lng ?? 0
-
-        
-        let restaurantLocation = CLLocation(latitude: lat, longitude: lon)
-//        let regionRadius: CLLocationDistance = 1000.0
-//        let region = MKCoordinateRegion(center: restaurantLocation.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//
-//        restaurantDetailsMapView.setRegion(region, animated: false)
-        restaurantDetailsMapView.delegate = self
-        
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = restaurantLocation.coordinate
-//        restaurantDetailsMapView.addAnnotation(annotation)
-        
-        var locationArray = [CLLocation]()
-        locationArray.append(restaurantLocation)
-        let annotations = locationArray.map { location -> MKAnnotation in
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location.coordinate
-            return annotation
-        }
-        restaurantDetailsMapView.showAnnotations(annotations, animated: false)
     }
 }
 
-extension RestaurantDetailsViewController: NavigationRightButtonProtocol {
-    func didTapMapButton(navigationController: UINavigationController) -> [CLLocation] {
-        let lat = restaurant?.location?.lat ?? 0
-        let lon = restaurant?.location?.lng ?? 0
-        let restaurantLocation = CLLocation(latitude: lat, longitude: lon)
+// MARK: - NavigationRightButtonProtocol
 
-        return [restaurantLocation]
+extension RestaurantDetailsViewController: NavigationRightButtonProtocol {
+    func didTapMapButton(navigationController: UINavigationController) -> [Restaurant] {
+        guard let restaurant = restaurant else {
+            return [Restaurant]()
+        }
+        return [restaurant]
     }
 }
 

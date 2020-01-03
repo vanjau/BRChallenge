@@ -25,27 +25,27 @@ class LunchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = LocalConstants.Strings.vcTitle
-        network()
+        navigationItem.title = LocalConstants.Strings.vcTitle
+        fetchRestaurants()
     }
     
-    
-    func network() {
-        let endpointString = "restaurants.json"
+    // MARK: - Networking
+
+    func fetchRestaurants() {
+        let urlString = Constants.API.baseURL + Constants.API.restaurnatsEndpoint
         let session = URLSession.shared
         let client = NetworkManager(session: session)
         
-        client.get(withEndpoitString: endpointString) { [weak self] result in
+        client.get(withUrlString: urlString) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
-            case .success(let char):
+                self?.restaurantErrorHandlingManager(error)
+            case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let charityResponse = try decoder.decode(RestaurantsResponse.self, from: char)
-                    print(charityResponse.restaurants[0])
-                    print(charityResponse.restaurants[0].name ?? "")
-                    self?.restaurantArray = charityResponse.restaurants
+                    let restaurantsResponse = try decoder.decode(RestaurantsResponse.self, from: data)
+                    self?.restaurantArray = restaurantsResponse.restaurants
                     DispatchQueue.main.async {
                         self?.restaurantsCollectionView.reloadData()
                     }
@@ -56,6 +56,32 @@ class LunchViewController: UIViewController {
         }
     }
     
+    // MARK: - Helper Methods
+    
+    fileprivate func restaurantErrorHandlingManager(_ restaurantError: RestaurantError) {
+        var errorMessageTitle = ""
+        var errorMessageMessage = ""
+        DispatchQueue.main.async {
+            switch restaurantError {
+            case .noInternetConnection:
+                errorMessageTitle = LocalConstants.ErrorMessages.noInternetConnectionTitle
+                errorMessageMessage = LocalConstants.ErrorMessages.noInternetConnectionMessage
+            case .urlFailure:
+                errorMessageTitle = LocalConstants.ErrorMessages.urlFailureTitle
+                errorMessageMessage = LocalConstants.ErrorMessages.urlFailureMessage
+            case .canNotProcessData:
+                errorMessageTitle = LocalConstants.ErrorMessages.canNotProcessDataTitle
+                errorMessageMessage = LocalConstants.ErrorMessages.canNotProcessDataMessage
+            }
+            
+            self.showSimpleAlertWindow(title: errorMessageTitle, message: errorMessageMessage, completionHandler: {
+                 self.fetchRestaurants()
+            })
+        }
+    }
+    
+    // MARK: - Orientation change
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         restaurantsCollectionView.collectionViewLayout.invalidateLayout()
     }
@@ -93,17 +119,9 @@ extension LunchViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension LunchViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let width: CGFloat
-
-        if Device.iPad {
-            width = view.frame.width / 2
-        } else {
-            width = view.frame.width
-        }
-
+        let width = Device.iPad ? view.frame.width / 2 : view.frame.width
+        
         return CGSize(width: width, height: LocalConstants.CollectionView.cellHeight)
     }
 }
@@ -111,8 +129,7 @@ extension LunchViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - NavigationRightButtonProtocol
 
 extension LunchViewController: NavigationRightButtonProtocol {
-    func didTapMapButton(navigationController: UINavigationController) -> [CLLocation] {
-        
+    func didTapMapButton(navigationController: UINavigationController) -> [Restaurant] {
         var locations = [CLLocation]()
 
         for item in restaurantArray! {
@@ -122,7 +139,7 @@ extension LunchViewController: NavigationRightButtonProtocol {
             locations.append(CLLocation(latitude: lat, longitude: lng))
         }
         
-        return locations
+        return restaurantArray ?? [Restaurant]()
     }
 }
 
@@ -133,7 +150,14 @@ extension LunchViewController {
         enum Strings {
             static let vcTitle = "Lunch Tyme"
         }
-        
+        enum ErrorMessages {
+            static let noInternetConnectionTitle = "There's no internet connection!"
+            static let noInternetConnectionMessage = "Check your internet connection and try again."
+            static let urlFailureTitle = "Oooops!"
+            static let urlFailureMessage = "Something wrong happened, please try again."
+            static let canNotProcessDataTitle = "Warning!"
+            static let canNotProcessDataMessage = "Please try again, something wrong happened on the server."
+        }
         enum CollectionView {
             static let cellHeight: CGFloat = CGFloat(180)
         }

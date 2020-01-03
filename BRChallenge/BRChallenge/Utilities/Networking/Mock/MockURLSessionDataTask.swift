@@ -1,5 +1,5 @@
 //
-//  URLSessionDataTaskMock.swift
+//  MockURLSessionDataTask.swift
 //  BRChallenge
 //
 //  Created by Vanja Ruzic on 31/12/2019.
@@ -8,16 +8,13 @@
 
 import Foundation
 
-// We create a partial mock by subclassing the original class
-class URLSessionDataTaskMock: URLSessionDataTask {
+class MockURLSessionDataTask: URLSessionDataTask {
     private let closure: () -> Void
 
     init(closure: @escaping () -> Void) {
         self.closure = closure
     }
 
-    // We override the 'resume' method and simply call our closure
-    // instead of actually resuming any task.
     override func resume() {
         closure()
     }

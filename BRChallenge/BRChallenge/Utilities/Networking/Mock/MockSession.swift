@@ -9,11 +9,6 @@
 import Foundation
 
 class MockSession: URLSessionProtocol {
-    
-    typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
-
-    // Properties that enable us to set exactly what data or error
-    // we want our mocked URLSession to return for any request.
     var data: Data?
     var error: Error?
     
@@ -22,7 +17,7 @@ class MockSession: URLSessionProtocol {
         let data = self.data
         let error = self.error
 
-        return URLSessionDataTaskMock {
+        return MockURLSessionDataTask {
             completionHandler(data, nil, error)
         }
     }

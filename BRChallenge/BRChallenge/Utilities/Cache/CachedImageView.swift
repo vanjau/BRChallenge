@@ -10,8 +10,12 @@ import UIKit
 
 class CachedImageView: UIImageView {
     
+    // MARK: - Properties
+    
     public static let imageCache = NSCache<NSString, DiscardableImageCacheItem>()
     private var urlStringForChecking: String?
+
+    // MARK: - Public Methods
 
     public func loadImage(urlString: String, completion: (() -> Void)? = nil) {
         image = nil

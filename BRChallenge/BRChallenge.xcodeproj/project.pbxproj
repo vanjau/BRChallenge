@@ -20,7 +20,7 @@
 		5A215CC623BA193000B9CF29 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CC523BA193000B9CF29 /* URLSessionProtocol.swift */; };
 		5A215CD423BB465300B9CF29 /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD323BB465300B9CF29 /* MockSession.swift */; };
 		5A215CD623BB469B00B9CF29 /* MockDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD523BB469B00B9CF29 /* MockDataTask.swift */; };
-		5A215CD823BB4C3A00B9CF29 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD723BB4C3A00B9CF29 /* URLSessionDataTaskMock.swift */; };
+		5A215CD823BB4C3A00B9CF29 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD723BB4C3A00B9CF29 /* MockURLSessionDataTask.swift */; };
 		5A215CDA23BB5D6F00B9CF29 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD923BB5D6F00B9CF29 /* NetworkingTests.swift */; };
 		5ADD81F623B61D4F0039D3A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADD81F523B61D4F0039D3A9 /* AppDelegate.swift */; };
 		5ADD81F823B61D4F0039D3A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADD81F723B61D4F0039D3A9 /* SceneDelegate.swift */; };
@@ -38,6 +38,9 @@
 		A5804ED023B7933900F47966 /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5804ECF23B7933800F47966 /* RestaurantCollectionViewCell.swift */; };
 		A5D7DE5923BA8B1700448C8C /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7DE5823BA8B1700448C8C /* CachedImageView.swift */; };
 		A5D7DE5B23BA8B5800448C8C /* DiscardableImageCacheItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7DE5A23BA8B5800448C8C /* DiscardableImageCacheItem.swift */; };
+		A5D7DE5D23BBC94B00448C8C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7DE5C23BBC94A00448C8C /* Constants.swift */; };
+		A5D7DE6023BD393C00448C8C /* BRMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7DE5F23BD393C00448C8C /* BRMapView.swift */; };
+		A5D7DE6223BE035200448C8C /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7DE6123BE035200448C8C /* NetworkReachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +74,7 @@
 		5A215CC523BA193000B9CF29 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		5A215CD323BB465300B9CF29 /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		5A215CD523BB469B00B9CF29 /* MockDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataTask.swift; sourceTree = "<group>"; };
-		5A215CD723BB4C3A00B9CF29 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
+		5A215CD723BB4C3A00B9CF29 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		5A215CD923BB5D6F00B9CF29 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		5ADD81F223B61D4F0039D3A9 /* BRChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ADD81F523B61D4F0039D3A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +98,9 @@
 		A5804ECF23B7933800F47966 /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
 		A5D7DE5823BA8B1700448C8C /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 		A5D7DE5A23BA8B5800448C8C /* DiscardableImageCacheItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardableImageCacheItem.swift; sourceTree = "<group>"; };
+		A5D7DE5C23BBC94A00448C8C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A5D7DE5F23BD393C00448C8C /* BRMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRMapView.swift; sourceTree = "<group>"; };
+		A5D7DE6123BE035200448C8C /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,8 @@
 			children = (
 				5A215CCF23BB41E000B9CF29 /* Cache */,
 				5A215CD023BB41EF00B9CF29 /* Networking */,
+				A5D7DE5C23BBC94A00448C8C /* Constants.swift */,
+				A5D7DE6123BE035200448C8C /* NetworkReachability.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -143,12 +151,10 @@
 		5A215CD023BB41EF00B9CF29 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A5D7DE5E23BBCBD300448C8C /* Mock */,
 				5A215CC123BA190100B9CF29 /* NetworkManager.swift */,
 				5A215CC323BA191F00B9CF29 /* URLSessionDataTaskProtocol.swift */,
 				5A215CC523BA193000B9CF29 /* URLSessionProtocol.swift */,
-				5A215CD323BB465300B9CF29 /* MockSession.swift */,
-				5A215CD523BB469B00B9CF29 /* MockDataTask.swift */,
-				5A215CD723BB4C3A00B9CF29 /* URLSessionDataTaskMock.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -252,6 +258,7 @@
 				A5804ECF23B7933800F47966 /* RestaurantCollectionViewCell.swift */,
 				5A215CB823BA0A7F00B9CF29 /* RestaurantInfoContainerView.swift */,
 				5A215CBC23BA0D9900B9CF29 /* RestaurantInfoContainerView.xib */,
+				A5D7DE5F23BD393C00448C8C /* BRMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +298,16 @@
 				5A215CA823B6450700B9CF29 /* BRTabBar.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A5D7DE5E23BBCBD300448C8C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5A215CD323BB465300B9CF29 /* MockSession.swift */,
+				5A215CD523BB469B00B9CF29 /* MockDataTask.swift */,
+				5A215CD723BB4C3A00B9CF29 /* MockURLSessionDataTask.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,7 +449,8 @@
 				A5D7DE5923BA8B1700448C8C /* CachedImageView.swift in Sources */,
 				5A215CC423BA191F00B9CF29 /* URLSessionDataTaskProtocol.swift in Sources */,
 				5A215CD423BB465300B9CF29 /* MockSession.swift in Sources */,
-				5A215CD823BB4C3A00B9CF29 /* URLSessionDataTaskMock.swift in Sources */,
+				5A215CD823BB4C3A00B9CF29 /* MockURLSessionDataTask.swift in Sources */,
+				A5D7DE5D23BBC94B00448C8C /* Constants.swift in Sources */,
 				5ADD81F623B61D4F0039D3A9 /* AppDelegate.swift in Sources */,
 				5A215CB323B66EB900B9CF29 /* MapViewController.swift in Sources */,
 				5A215CBF23BA18B500B9CF29 /* Restaurant.swift in Sources */,
@@ -440,6 +458,7 @@
 				A5D7DE5B23BA8B5800448C8C /* DiscardableImageCacheItem.swift in Sources */,
 				5ADD823523B6388A0039D3A9 /* InternetsViewController.swift in Sources */,
 				5A215CD623BB469B00B9CF29 /* MockDataTask.swift in Sources */,
+				A5D7DE6223BE035200448C8C /* NetworkReachability.swift in Sources */,
 				5A215CB523B684B000B9CF29 /* Extensions.swift in Sources */,
 				5A215CB123B667D000B9CF29 /* LunchNavigationController.swift in Sources */,
 				5A215CC223BA190100B9CF29 /* NetworkManager.swift in Sources */,
@@ -449,6 +468,7 @@
 				A5804ECE23B7503D00F47966 /* InternetsNavigationController.swift in Sources */,
 				A5804ECA23B74F3E00F47966 /* BRNavigationController.swift in Sources */,
 				A5804ED023B7933900F47966 /* RestaurantCollectionViewCell.swift in Sources */,
+				A5D7DE6023BD393C00448C8C /* BRMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

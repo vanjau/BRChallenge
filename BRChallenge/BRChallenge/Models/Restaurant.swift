@@ -9,7 +9,7 @@
 import Foundation
 
 struct RestaurantsResponse: Decodable {
-    var restaurants: [Restaurant]
+    var restaurants: [Restaurant]?
 }
 
 struct Restaurant: Decodable {

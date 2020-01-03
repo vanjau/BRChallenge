@@ -11,13 +11,19 @@ import UIKit
 
 class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
     
+    // MARK: - Properties
+
     private(set) public var image: UIImage?
-    var accessCount: UInt = 0
+    private var accessCount: UInt = 0
     
+    // MARK: - Init
+
     public init(image: UIImage) {
         self.image = image
     }
     
+    // MARK: - NSDiscardableContent
+
     public func beginContentAccess() -> Bool {
         if image == nil {
             return false

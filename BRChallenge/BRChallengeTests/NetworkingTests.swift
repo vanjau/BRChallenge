@@ -10,48 +10,46 @@ import XCTest
 @testable import BRChallenge
 
 class NetworkingTests: XCTestCase {
+    //var result: RestaurantResult? = nil
 
     func testUrlFailure() {
         let url = ""
 
         let session = MockSession()
-        session.data = nil
-        var result: Result<Data, RestaurantError>?
+        session.data = Data()
+        var result: RestaurantResult?
 
         let client = NetworkManager(session: session)
-        client.get(url: url) { res in
+        client.get(withUrlString: url) { res in
             result = res
+            XCTAssertEqual(result, .failure(RestaurantError.urlFailure))
         }
-        
-        XCTAssertEqual(result, .failure(RestaurantError.urlFailure))
     }
     
     func testDataFailure() {
         let url = "https://mock.url"
         let session = MockSession()
         session.data = nil
-        var result: Result<Data, RestaurantError>?
+        var result: RestaurantResult?
 
         let client = NetworkManager(session: session)
-        client.get(url: url) { res in
+        client.get(withUrlString: url) { res in
             result = res
+            XCTAssertEqual(result, .failure(RestaurantError.canNotProcessData))
         }
-        
-        XCTAssertEqual(result, .failure(RestaurantError.canNotProcessData))
     }
-    
+
     func testSuccessRespons() {
         let url = "https://mock.url"
         let data = Data()
         let session = MockSession()
         session.data = data
-        var result: Result<Data, RestaurantError>?
+        var result: RestaurantResult?
 
         let client = NetworkManager(session: session)
-        client.get(url: url) { res in
+        client.get(withUrlString: url) { res in
             result = res
+            XCTAssertEqual(result, .success(data))
         }
-        
-        XCTAssertEqual(result, .success(data))
     }
 }
