@@ -17,6 +17,7 @@ enum RestaurantError: Error {
 typealias RestaurantResult = Result<Data, RestaurantError>
 
 struct NetworkManager {
+    
     private let session: URLSessionProtocol
     
     public init(session: URLSessionProtocol) {

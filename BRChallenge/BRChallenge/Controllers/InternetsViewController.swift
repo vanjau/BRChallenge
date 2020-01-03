@@ -14,10 +14,10 @@ class InternetsViewController: UIViewController {
     // MARK: - Properties
     
     lazy fileprivate var webView: WKWebView = {
-        let view = WKWebView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
         
-        return view
+        return webView
     }()
     
     lazy fileprivate var progressView: UIProgressView = {
@@ -66,6 +66,7 @@ class InternetsViewController: UIViewController {
 // MARK - WKNavigationDelegate
 
 extension InternetsViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         navigationController?.isToolbarHidden = true
     }
@@ -82,6 +83,7 @@ extension InternetsViewController: WKNavigationDelegate {
 // MARK - InternetsNavigationDelegate
 
 extension InternetsViewController: InternetsNavigationDelegate {
+    
     func didTapBackButton(_ withNavigationController: InternetsNavigationController) {
         webView.goBack()
     }
@@ -98,6 +100,7 @@ extension InternetsViewController: InternetsNavigationDelegate {
 // MARK: - Local Constants
 
 extension InternetsViewController {
+    
     fileprivate enum LocalConstants {
         enum Strings {
             static let brWebsite = "https://www.bottlerocketstudios.com"

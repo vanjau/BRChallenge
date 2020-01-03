@@ -12,6 +12,7 @@ import UIKit
 // MARK: - UIViewController
 
 extension UIViewController {
+    
     static internal var storyboardIdentifier: String {
         return String(describing: self)
     }
@@ -29,6 +30,7 @@ extension UIViewController {
 // MARK: - UICollectionViewCell
 
 extension UICollectionViewCell {
+    
     static internal var cellIdentifier: String {
         return String(describing: self)
     }

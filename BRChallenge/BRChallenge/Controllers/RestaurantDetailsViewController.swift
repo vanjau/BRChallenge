@@ -22,6 +22,11 @@ class RestaurantDetailsViewController: UIViewController {
     
     // MARK: - Init
     
+    /**
+     Creates a personalized RestaurantDetailsViewController with restaurant object.
+     - Parameter coder: Coder.
+     - Parameter restaurant: Tapped restaurant object from the list of restaurants.
+     */
     init?(coder: NSCoder, restaurant: Restaurant) {
         super.init(coder: coder)
         self.restaurant = restaurant
@@ -35,7 +40,7 @@ class RestaurantDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Details"
+        navigationItem.title = LocalConstants.Strings.vcTitle
         restaurantInfoViewSetup()
         mapSetup()
         restaurantContactSetup()
@@ -70,12 +75,24 @@ class RestaurantDetailsViewController: UIViewController {
 
 // MARK: - NavigationRightButtonProtocol
 
-extension RestaurantDetailsViewController: NavigationRightButtonProtocol {
-    func didTapMapButton(navigationController: UINavigationController) -> [Restaurant] {
+extension RestaurantDetailsViewController: NavigationRightButtonDelegate {
+    
+    func didTapMapButton(_ navigationController: UINavigationController) -> [Restaurant] {
         guard let restaurant = restaurant else {
             return [Restaurant]()
         }
         return [restaurant]
+    }
+}
+
+// MARK: - Local Constants
+
+extension RestaurantDetailsViewController {
+    
+    fileprivate enum LocalConstants {
+        enum Strings {
+            static let vcTitle = "Details"
+        }
     }
 }
 

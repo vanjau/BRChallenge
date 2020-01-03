@@ -10,19 +10,27 @@ import XCTest
 @testable import BRChallenge
 
 class NetworkingTests: XCTestCase {
-    //var result: RestaurantResult? = nil
 
     func testUrlFailure() {
         let url = ""
-
         let session = MockSession()
         session.data = Data()
         var result: RestaurantResult?
 
+        let expectation = self.expectation(description: "Restaurants urlFailure expectation")
+
         let client = NetworkManager(session: session)
         client.get(withUrlString: url) { res in
             result = res
-            XCTAssertEqual(result, .failure(RestaurantError.urlFailure))
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            } else {
+                XCTAssertEqual(result, .failure(RestaurantError.urlFailure))
+            }
         }
     }
     
@@ -31,11 +39,20 @@ class NetworkingTests: XCTestCase {
         let session = MockSession()
         session.data = nil
         var result: RestaurantResult?
+        let expectation = self.expectation(description: "Restaurants dataFailure expectation")
 
         let client = NetworkManager(session: session)
         client.get(withUrlString: url) { res in
             result = res
-            XCTAssertEqual(result, .failure(RestaurantError.canNotProcessData))
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            } else {
+                XCTAssertEqual(result, .failure(RestaurantError.canNotProcessData))
+            }
         }
     }
 
@@ -45,11 +62,20 @@ class NetworkingTests: XCTestCase {
         let session = MockSession()
         session.data = data
         var result: RestaurantResult?
+        let expectation = self.expectation(description: "Restaurants success expectation")
 
         let client = NetworkManager(session: session)
         client.get(withUrlString: url) { res in
             result = res
-            XCTAssertEqual(result, .success(data))
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0) { (error) in
+            if error != nil {
+                XCTFail(error!.localizedDescription)
+            } else {
+                XCTAssertEqual(result, .success(data))
+            }
         }
     }
 }

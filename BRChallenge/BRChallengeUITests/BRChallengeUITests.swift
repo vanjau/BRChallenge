@@ -10,33 +10,49 @@ import XCTest
 
 class BRChallengeUITests: XCTestCase {
 
+    private var app: XCUIApplication!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    func testExample() {
-        XCUIApplication().navigationBars["Lunch Tyme"].buttons["icon map"].tap()
-                // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    func testLunchTabTapped() {
+        app.tabBars.buttons["Lunch"].tap()
+        let lunchTymeNavigationBar = app.navigationBars["Lunch Tyme"]
         
+        XCTAssert(lunchTymeNavigationBar.staticTexts["Lunch Tyme"].exists)
+        XCTAssert(lunchTymeNavigationBar.children(matching: .button).element.exists)
     }
-
-    func testLaunchPerformance() {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testInternetsTabTapped() {
+        app.tabBars.buttons["Internets"].tap()
+        let brchallengeInternetsviewNavigationBar = app.navigationBars["BRChallenge.InternetsView"]
+        
+        XCTAssert(brchallengeInternetsviewNavigationBar.exists)
+        XCTAssert(brchallengeInternetsviewNavigationBar.buttons["ic webBack"].exists)
+        XCTAssert(brchallengeInternetsviewNavigationBar.buttons["ic webRefresh"].exists)
+        XCTAssert(brchallengeInternetsviewNavigationBar.buttons["ic webForward"].exists)
+    }
+    
+    func testRestaurantDetails() {
+        let cellgradientbackgroundElement = app.collectionViews.children(matching: .cell).element(boundBy: 0).otherElements.containing(.image, identifier:"cellGradientBackground").element
+        cellgradientbackgroundElement.tap()
+        let detailsNavigationBar = app.navigationBars["Details"]
+        
+        XCTAssert(detailsNavigationBar.exists)
+        XCTAssert(detailsNavigationBar.buttons["icon map"].exists)
+    }
+    
+    func testRestaurantDetailsBackButton() {
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).otherElements.containing(.image, identifier:"cellGradientBackground").children(matching: .other).element.children(matching: .other).element.tap()
+        app.navigationBars["Details"].buttons["Lunch Tyme"].tap()
+        
+        XCTAssert(app.navigationBars["Lunch Tyme"].staticTexts["Lunch Tyme"].exists)
     }
 }

@@ -12,14 +12,16 @@ class BRNavigationController: UINavigationController, UINavigationControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.delegate = self
+        delegate = self
         navigationBar.tintColor = .white
-        
+        navBarAppearanceSetup()
+    }
+    
+    fileprivate func navBarAppearanceSetup() {
         let standard = UINavigationBarAppearance()
         standard.configureWithOpaqueBackground()
         standard.backgroundColor = #colorLiteral(red: 0.2632806003, green: 0.9094750285, blue: 0.5833142996, alpha: 1)
-        let font: UIFont = UIFont(name: "AvenirNext-DemiBold", size: 17) ?? UIFont.systemFont(ofSize: 10)
+        let font: UIFont = Utils.Fonts.brFontDemiBold ?? UIFont.systemFont(ofSize: 17)
         standard.titleTextAttributes = [.foregroundColor: UIColor.white, NSAttributedString.Key.font: font]
           
         UINavigationBar.appearance().standardAppearance = standard

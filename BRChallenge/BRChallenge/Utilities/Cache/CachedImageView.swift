@@ -17,6 +17,11 @@ class CachedImageView: UIImageView {
 
     // MARK: - Public Methods
 
+    /**
+     Load image, check first if it's already cached - if not download asynchrony.
+     - Parameter urlString: This string will be used for matching cached images and images that needs to be downloaded.
+     - Parameter completion: This is optional if something needs to be done after image is loaded.
+     */
     public func loadImage(urlString: String, completion: (() -> Void)? = nil) {
         image = nil
         self.urlStringForChecking = urlString
@@ -36,17 +41,17 @@ class CachedImageView: UIImageView {
             }
             
             DispatchQueue.main.async {
-                if let image = UIImage(data: data!) {
-                    let cacheItem = DiscardableImageCacheItem(image: image)
-                    CachedImageView.imageCache.setObject(cacheItem, forKey: urlKey)
-                    
-                    if urlString == self?.urlStringForChecking {
-                        self?.image = image
-                        completion?()
-                    }
+                guard let data = data else { return }
+                guard let image = UIImage(data: data) else { return }
+                
+                let cacheItem = DiscardableImageCacheItem(image: image)
+                CachedImageView.imageCache.setObject(cacheItem, forKey: urlKey)
+
+                if urlString == self?.urlStringForChecking {
+                    self?.image = image
+                    completion?()
                 }
             }
-            
         }).resume()
     }
 }

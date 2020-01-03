@@ -10,6 +10,11 @@ import Foundation
 import Network
 
 class NetworkReachability {
+    
+    /**
+     Monitoring if there is internet connection
+     - Parameter callback: Returns Bool if there is connection or not.
+     */
     static func isReachable(callback: @escaping (Bool) -> Void) {
         let monitor = NWPathMonitor()
         let queue = DispatchQueue.global(qos: .background)

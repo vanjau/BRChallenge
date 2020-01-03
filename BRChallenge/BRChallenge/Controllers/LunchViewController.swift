@@ -9,11 +9,6 @@
 import UIKit
 import MapKit
 
-struct Device {
-    static let iPad = UIDevice.current.userInterfaceIdiom == .pad
-    static let iPhone = UIDevice.current.userInterfaceIdiom == .phone
-}
-
 class LunchViewController: UIViewController {
   
     // MARK: - Properties
@@ -39,18 +34,18 @@ class LunchViewController: UIViewController {
         client.get(withUrlString: urlString) { [weak self] result in
             switch result {
             case .failure(let error):
-                print(error.localizedDescription)
                 self?.restaurantErrorHandlingManager(error)
             case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let restaurantsResponse = try decoder.decode(RestaurantsResponse.self, from: data)
-                    self?.restaurantArray = restaurantsResponse.restaurants
-                    DispatchQueue.main.async {
-                        self?.restaurantsCollectionView.reloadData()
+                RestaurantResponse.parseRestaurantResponse(data: data) { result in
+                    switch result {
+                    case .failure(let error):
+                        self?.restaurantErrorHandlingManager(error)
+                    case .success(let response):
+                        self?.restaurantArray = response.restaurants
+                         DispatchQueue.main.async {
+                             self?.restaurantsCollectionView.reloadData()
+                         }
                     }
-                } catch {
-                    print("FAIL")
                 }
             }
         }
@@ -90,6 +85,7 @@ class LunchViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 
 extension LunchViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return restaurantArray?.count ?? 0
     }
@@ -105,6 +101,7 @@ extension LunchViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension LunchViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let restaurant = restaurantArray?[indexPath.item] ?? Restaurant()
         guard let mapVC = storyboard?.instantiateViewController(identifier: RestaurantDetailsViewController.storyboardIdentifier, creator: { coder in
@@ -119,26 +116,20 @@ extension LunchViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension LunchViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Device.iPad ? view.frame.width / 2 : view.frame.width
+        let viewFrame: CGFloat = view.frame.width
+        let width: CGFloat = Utils.Device.iPad ? viewFrame / 2 : viewFrame
         
         return CGSize(width: width, height: LocalConstants.CollectionView.cellHeight)
     }
 }
 
-// MARK: - NavigationRightButtonProtocol
+// MARK: - NavigationRightButtonDelegate
 
-extension LunchViewController: NavigationRightButtonProtocol {
-    func didTapMapButton(navigationController: UINavigationController) -> [Restaurant] {
-        var locations = [CLLocation]()
-
-        for item in restaurantArray! {
-            let lat = item.location?.lat ?? 0
-            let lng = item.location?.lng ?? 0
-
-            locations.append(CLLocation(latitude: lat, longitude: lng))
-        }
-        
+extension LunchViewController: NavigationRightButtonDelegate {
+    
+    func didTapMapButton(_ navigationController: UINavigationController) -> [Restaurant] {
         return restaurantArray ?? [Restaurant]()
     }
 }
@@ -146,6 +137,7 @@ extension LunchViewController: NavigationRightButtonProtocol {
 // MARK: - Local Constants
 
 extension LunchViewController {
+    
     fileprivate enum LocalConstants {
         enum Strings {
             static let vcTitle = "Lunch Tyme"

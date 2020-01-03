@@ -45,6 +45,9 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="EjX-WK-Ef8"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isCentered" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -75,7 +78,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CjJ-cd-Z9B" firstAttribute="bottom" secondItem="cMs-56-BdF" secondAttribute="bottom" id="fSz-JF-TfG"/>
                             <constraint firstItem="cMs-56-BdF" firstAttribute="top" secondItem="CjJ-cd-Z9B" secondAttribute="top" id="haS-77-J6k"/>
@@ -116,7 +119,7 @@
                                     <constraint firstAttribute="height" constant="60" id="nWw-i9-ERm"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCentered" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCentered" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bl3-DU-KfS">

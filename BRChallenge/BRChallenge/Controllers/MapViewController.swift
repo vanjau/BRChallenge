@@ -18,6 +18,11 @@ class MapViewController: UIViewController {
     
     // MARK: - Init
     
+    /**
+     Creates a personalized MapViewController with array of restaurant objects.
+     - Parameter coder: Coder.
+     - Parameter restaurants: Array of restaurants fetched from the server.
+     */
     init?(coder: NSCoder, restaurants: [Restaurant]) {
         self.restaurantsArray = restaurants
         super.init(coder: coder)

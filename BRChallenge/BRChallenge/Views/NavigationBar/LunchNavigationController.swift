@@ -9,16 +9,20 @@
 import UIKit
 import MapKit
 
-protocol NavigationRightButtonProtocol: AnyObject {
-    func didTapMapButton(navigationController: UINavigationController) -> [Restaurant]
+protocol NavigationRightButtonDelegate: AnyObject {
+    /**
+     Opens MapViewController and passing array of restaurants after tapping map button in navigation bar.
+     - Parameter withNavigationController:
+     */
+    func didTapMapButton(_ withNavigationController: UINavigationController) -> [Restaurant]
 }
 
 class LunchNavigationController: BRNavigationController {
 
-    public weak var navigationRightButtonDelegate: NavigationRightButtonProtocol?
+    public weak var navigationRightButtonDelegate: NavigationRightButtonDelegate?
 
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        self.navigationRightButtonDelegate = viewController as? NavigationRightButtonProtocol
+        self.navigationRightButtonDelegate = viewController as? NavigationRightButtonDelegate
         let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         viewController.navigationItem.backBarButtonItem = item
         let mapImage = #imageLiteral(resourceName: "icon_map")
@@ -26,7 +30,7 @@ class LunchNavigationController: BRNavigationController {
     }
     
     @objc func mapTapped() {
-        let locations = navigationRightButtonDelegate?.didTapMapButton(navigationController: self) ?? [Restaurant]()
+        let locations = navigationRightButtonDelegate?.didTapMapButton(self) ?? [Restaurant]()
         
         guard let addTripViewController = storyboard?.instantiateViewController(identifier: MapViewController.storyboardIdentifier, creator: { coder in
             return MapViewController(coder: coder, restaurants: locations)

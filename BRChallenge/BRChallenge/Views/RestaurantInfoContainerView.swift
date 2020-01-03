@@ -17,7 +17,7 @@ class RestaurantInfoContainerView: UIView {
         
     @IBInspectable var isCentered: Bool = false {
         didSet {
-            labelsStackViewCenterVerticalConstraint?.isActive = true
+            labelsStackViewCenterVerticalConstraint?.isActive = isCentered
         }
     }
     
