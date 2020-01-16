@@ -10,6 +10,8 @@ import UIKit
 
 class RestaurantCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+
     @IBOutlet weak var restaurantPhotoImageView: CachedImageView!
     @IBOutlet weak var restaurantInfoView: RestaurantInfoContainerView!
     

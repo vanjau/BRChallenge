@@ -118,8 +118,10 @@ extension LunchViewController: UICollectionViewDelegate {
 extension LunchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let viewFrame: CGFloat = view.frame.width
-        let width: CGFloat = Utils.Device.iPad ? viewFrame / 2 : viewFrame
+        let collectionViewWidth: CGFloat = collectionView.frame.width
+        guard let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation else { return CGSize.zero
+        }
+        let width: CGFloat = (interfaceOrientation.isLandscape || Utils.Device.iPad) ? collectionViewWidth / 2 : collectionViewWidth
         
         return CGSize(width: width, height: LocalConstants.CollectionView.cellHeight)
     }

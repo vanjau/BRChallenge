@@ -35,3 +35,12 @@ extension UICollectionViewCell {
         return String(describing: self)
     }
 }
+
+// MARK: - UITableViewCell
+
+extension UITableViewCell {
+    
+    static internal var cellIdentifier: String {
+        return String(describing: self)
+    }
+}

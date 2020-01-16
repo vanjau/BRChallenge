@@ -14,6 +14,11 @@ class MapViewController: UIViewController {
     // MARK: - Properties
 
     @IBOutlet weak var mapView: BRMapView!
+    @IBOutlet weak var dismissButton: UIButton! {
+        didSet {
+            dismissButton.layer.cornerRadius = dismissButton.frame.width / 2
+        }
+    }
     fileprivate var restaurantsArray: [Restaurant]
     
     // MARK: - Init
@@ -38,4 +43,10 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.restaurantsArray = restaurantsArray
     }
+    
+    // MARK: - Actions
+
+    @IBAction func dismissAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }    
 }
