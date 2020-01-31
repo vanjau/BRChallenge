@@ -25,7 +25,7 @@ class DetailsRestaurantContactTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
 
-    fileprivate func configureLabels(restaurant: Restaurant) {
+    private func configureLabels(restaurant: Restaurant) {
         let addressString = restaurant.location?.address ?? ""
         let cityString = restaurant.location?.city ?? ""
         let ccString = restaurant.location?.cc ?? ""
@@ -37,7 +37,7 @@ class DetailsRestaurantContactTableViewCell: UITableViewCell {
         twitterHandleString.text = twitterString.isEmpty ? "no twitter available" : twitterString
     }
     
-    fileprivate func generateAddressText(address: String, city: String, cc: String, postalCode: String) -> String {
+    private func generateAddressText(address: String, city: String, cc: String, postalCode: String) -> String {
         return address + "\n" + cc + ", " + cc + " " + postalCode
     }
 }

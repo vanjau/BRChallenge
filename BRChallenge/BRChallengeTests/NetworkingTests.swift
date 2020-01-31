@@ -12,58 +12,26 @@ import XCTest
 class NetworkingTests: XCTestCase {
 
     func testUrlFailure() {
-        let url = ""
-        let session = MockSession()
-        session.data = Data()
-        var result: RestaurantResult?
-
-        let expectation = self.expectation(description: "Restaurants urlFailure expectation")
-
-        let client = NetworkManager(session: session)
-        client.get(withUrlString: url) { res in
-            result = res
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5.0) { (error) in
-            if error != nil {
-                XCTFail(error!.localizedDescription)
-            } else {
-                XCTAssertEqual(result, .failure(RestaurantError.urlFailure))
-            }
-        }
+        checkExpectedResultType(urlString: "", data: Data(), expectationDescription: "Restaurants urlFailure expectation", expectedResult: .failure(RestaurantError.urlFailure))
     }
     
     func testDataFailure() {
-        let url = "https://mock.url"
-        let session = MockSession()
-        session.data = nil
-        var result: RestaurantResult?
-        let expectation = self.expectation(description: "Restaurants dataFailure expectation")
-
-        let client = NetworkManager(session: session)
-        client.get(withUrlString: url) { res in
-            result = res
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5.0) { (error) in
-            if error != nil {
-                XCTFail(error!.localizedDescription)
-            } else {
-                XCTAssertEqual(result, .failure(RestaurantError.canNotProcessData))
-            }
-        }
+        checkExpectedResultType(urlString: "https://mock.url", data: nil, expectationDescription: "Restaurants dataFailure expectation", expectedResult: .failure(RestaurantError.canNotProcessData))
     }
 
     func testSuccessRespons() {
-        let url = "https://mock.url"
-        let data = Data()
+        checkExpectedResultType(urlString: "https://mock.url", data: Data(), expectationDescription: "Restaurants success expectation", expectedResult: .success(Data()))
+    }
+    
+    //MARK: - Helpers
+    
+    private func checkExpectedResultType(urlString: String, data: Data?, expectationDescription: String, expectedResult: RestaurantResult) {
+        let url = urlString
         let session = MockSession()
         session.data = data
         var result: RestaurantResult?
-        let expectation = self.expectation(description: "Restaurants success expectation")
-
+        let expectation = self.expectation(description: expectationDescription)
+        
         let client = NetworkManager(session: session)
         client.get(withUrlString: url) { res in
             result = res
@@ -74,7 +42,7 @@ class NetworkingTests: XCTestCase {
             if error != nil {
                 XCTFail(error!.localizedDescription)
             } else {
-                XCTAssertEqual(result, .success(data))
+                XCTAssertEqual(result, expectedResult, "Unexpected Result type.")
             }
         }
     }

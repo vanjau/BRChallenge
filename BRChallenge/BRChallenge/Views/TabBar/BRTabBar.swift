@@ -41,7 +41,7 @@ class BRTabBar: UITabBar {
     
     // MARK: - Private Methods
 
-    fileprivate func setupTabBarFont() {
+    private func setupTabBarFont() {
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedString.Key.font: Utils.Fonts.brFontRegular]
         appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
