@@ -9,18 +9,18 @@
 import UIKit
 import WebKit
 
-class InternetsViewController: UIViewController {
+class InternetsViewController: InternetsNavigationController {
 
     // MARK: - Properties
     
-    lazy fileprivate var webView: WKWebView = {
+    lazy private var webView: WKWebView = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         
         return webView
     }()
     
-    lazy fileprivate var progressView: UIProgressView = {
+    lazy private var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         let progressButton = UIBarButtonItem(customView: progressView)
@@ -34,12 +34,19 @@ class InternetsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBarSetup()
         webViewSetup()
     }
     
     // MARK: - Private Methods
     
-    fileprivate func webViewSetup() {
+    private func navigationBarSetup() {
+        internetsNavigationDelegate = self
+        guard let back = backBarItem, let refresh = refreshBarItem, let forward = forwardBarItem else { return }
+        navigationItem.leftBarButtonItems = [back, refresh, forward]
+    }
+    
+    private func webViewSetup() {
         view.addSubview(webView)
         webView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
         webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -69,6 +76,8 @@ extension InternetsViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         navigationController?.isToolbarHidden = true
+        backBarItem?.isEnabled = webView.canGoBack
+        forwardBarItem?.isEnabled = webView.canGoForward
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -101,7 +110,7 @@ extension InternetsViewController: InternetsNavigationDelegate {
 
 extension InternetsViewController {
     
-    fileprivate enum LocalConstants {
+    private enum LocalConstants {
         enum Strings {
             static let brWebsite = "https://www.bottlerocketstudios.com"
         }

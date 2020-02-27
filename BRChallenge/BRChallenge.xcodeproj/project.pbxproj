@@ -21,6 +21,9 @@
 		5A215CD423BB465300B9CF29 /* MockSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD323BB465300B9CF29 /* MockSession.swift */; };
 		5A215CD823BB4C3A00B9CF29 /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD723BB4C3A00B9CF29 /* MockURLSessionDataTask.swift */; };
 		5A215CDA23BB5D6F00B9CF29 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A215CD923BB5D6F00B9CF29 /* NetworkingTests.swift */; };
+		5AA784B423D08E520089E571 /* DetailsMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA784B323D08E520089E571 /* DetailsMapTableViewCell.swift */; };
+		5AA784B623D092930089E571 /* DetailsRestaurantInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA784B523D092930089E571 /* DetailsRestaurantInfoTableViewCell.swift */; };
+		5AA784B923D0AA360089E571 /* DetailsRestaurantContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA784B823D0AA360089E571 /* DetailsRestaurantContactTableViewCell.swift */; };
 		5ADD81F623B61D4F0039D3A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADD81F523B61D4F0039D3A9 /* AppDelegate.swift */; };
 		5ADD81F823B61D4F0039D3A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADD81F723B61D4F0039D3A9 /* SceneDelegate.swift */; };
 		5ADD81FD23B61D4F0039D3A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ADD81FB23B61D4F0039D3A9 /* Main.storyboard */; };
@@ -75,6 +78,9 @@
 		5A215CD323BB465300B9CF29 /* MockSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSession.swift; sourceTree = "<group>"; };
 		5A215CD723BB4C3A00B9CF29 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		5A215CD923BB5D6F00B9CF29 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		5AA784B323D08E520089E571 /* DetailsMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsMapTableViewCell.swift; sourceTree = "<group>"; };
+		5AA784B523D092930089E571 /* DetailsRestaurantInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRestaurantInfoTableViewCell.swift; sourceTree = "<group>"; };
+		5AA784B823D0AA360089E571 /* DetailsRestaurantContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRestaurantContactTableViewCell.swift; sourceTree = "<group>"; };
 		5ADD81F223B61D4F0039D3A9 /* BRChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ADD81F523B61D4F0039D3A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5ADD81F723B61D4F0039D3A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +164,17 @@
 				A5D7DE6323BF38DA00448C8C /* RestaurantResponse.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		5AA784B723D0980C0089E571 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A5804ECF23B7933800F47966 /* RestaurantCollectionViewCell.swift */,
+				5AA784B323D08E520089E571 /* DetailsMapTableViewCell.swift */,
+				5AA784B523D092930089E571 /* DetailsRestaurantInfoTableViewCell.swift */,
+				5AA784B823D0AA360089E571 /* DetailsRestaurantContactTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		5ADD81E923B61D4E0039D3A9 = {
@@ -254,9 +271,9 @@
 		5ADD822923B620E20039D3A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5AA784B723D0980C0089E571 /* Cells */,
 				A5804ECC23B7500000F47966 /* TabBar */,
 				A5804ECB23B74FE900F47966 /* NavigationBar */,
-				A5804ECF23B7933800F47966 /* RestaurantCollectionViewCell.swift */,
 				5A215CB823BA0A7F00B9CF29 /* RestaurantInfoContainerView.swift */,
 				5A215CBC23BA0D9900B9CF29 /* RestaurantInfoContainerView.xib */,
 				A5D7DE5F23BD393C00448C8C /* BRMapView.swift */,
@@ -445,14 +462,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A215CB923BA0A7F00B9CF29 /* RestaurantInfoContainerView.swift in Sources */,
+				5AA784B923D0AA360089E571 /* DetailsRestaurantContactTableViewCell.swift in Sources */,
 				5ADD823323B638690039D3A9 /* LunchViewController.swift in Sources */,
 				A5D7DE6623BF552D00448C8C /* Utils.swift in Sources */,
 				A5D7DE5923BA8B1700448C8C /* CachedImageView.swift in Sources */,
 				5A215CC423BA191F00B9CF29 /* URLSessionDataTaskProtocol.swift in Sources */,
+				5AA784B623D092930089E571 /* DetailsRestaurantInfoTableViewCell.swift in Sources */,
 				5A215CD423BB465300B9CF29 /* MockSession.swift in Sources */,
 				5A215CD823BB4C3A00B9CF29 /* MockURLSessionDataTask.swift in Sources */,
 				A5D7DE5D23BBC94B00448C8C /* Constants.swift in Sources */,
 				5ADD81F623B61D4F0039D3A9 /* AppDelegate.swift in Sources */,
+				5AA784B423D08E520089E571 /* DetailsMapTableViewCell.swift in Sources */,
 				5A215CB323B66EB900B9CF29 /* MapViewController.swift in Sources */,
 				A5D7DE6423BF38DA00448C8C /* RestaurantResponse.swift in Sources */,
 				5A215CBF23BA18B500B9CF29 /* Restaurant.swift in Sources */,

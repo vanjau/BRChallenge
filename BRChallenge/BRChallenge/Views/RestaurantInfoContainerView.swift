@@ -31,7 +31,7 @@ class RestaurantInfoContainerView: UIView {
         commonInit()
     }
     
-    fileprivate func commonInit() {
+    private func commonInit() {
         Bundle.main.loadNibNamed(String(describing: RestaurantInfoContainerView.self), owner: self, options: nil)
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false

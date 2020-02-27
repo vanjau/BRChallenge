@@ -17,7 +17,7 @@ class BRNavigationController: UINavigationController, UINavigationControllerDele
         navBarAppearanceSetup()
     }
     
-    fileprivate func navBarAppearanceSetup() {
+    private func navBarAppearanceSetup() {
         let standard = UINavigationBarAppearance()
         standard.configureWithOpaqueBackground()
         standard.backgroundColor = #colorLiteral(red: 0.2632806003, green: 0.9094750285, blue: 0.5833142996, alpha: 1)
