@@ -19,7 +19,7 @@ class MapViewController: UIViewController {
             dismissButton.layer.cornerRadius = dismissButton.frame.width / 2
         }
     }
-    fileprivate var restaurantsArray: [Restaurant]
+    private var restaurantsArray: [Restaurant]
     
     // MARK: - Init
     

@@ -44,3 +44,12 @@ extension UITableViewCell {
         return String(describing: self)
     }
 }
+
+// MARK: - String
+
+extension String {
+
+    func localized(withComment comment: String? = nil) -> String {
+        return NSLocalizedString(self, comment: comment ?? "")
+    }
+}

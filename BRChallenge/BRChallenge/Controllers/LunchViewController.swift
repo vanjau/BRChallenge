@@ -14,7 +14,7 @@ class LunchViewController: UIViewController {
     // MARK: - Properties
 
     @IBOutlet var restaurantsCollectionView: UICollectionView!
-    fileprivate var restaurantArray: [Restaurant]?
+    private var restaurantArray: [Restaurant]?
     
     // MARK: - Lifecycle
 
@@ -53,7 +53,7 @@ class LunchViewController: UIViewController {
     
     // MARK: - Helper Methods
     
-    fileprivate func restaurantErrorHandlingManager(_ restaurantError: RestaurantError) {
+    private func restaurantErrorHandlingManager(_ restaurantError: RestaurantError) {
         var errorMessageTitle = ""
         var errorMessageMessage = ""
         DispatchQueue.main.async {
@@ -140,17 +140,17 @@ extension LunchViewController: NavigationRightButtonDelegate {
 
 extension LunchViewController {
     
-    fileprivate enum LocalConstants {
+    private enum LocalConstants {
         enum Strings {
-            static let vcTitle = "Lunch Tyme"
+            static let vcTitle = "Lunch Time".localized()
         }
         enum ErrorMessages {
-            static let noInternetConnectionTitle = "There's no internet connection!"
-            static let noInternetConnectionMessage = "Check your internet connection and try again."
-            static let urlFailureTitle = "Oooops!"
-            static let urlFailureMessage = "Something wrong happened, please try again."
-            static let canNotProcessDataTitle = "Warning!"
-            static let canNotProcessDataMessage = "Please try again, something wrong happened on the server."
+            static let noInternetConnectionTitle = "There's no internet connection!".localized()
+            static let noInternetConnectionMessage = "Check your internet connection and try again.".localized()
+            static let urlFailureTitle = "Oooops!".localized()
+            static let urlFailureMessage = "Something wrong happened, please try again.".localized()
+            static let canNotProcessDataTitle = "Warning!".localized()
+            static let canNotProcessDataMessage = "Please try again, something wrong happened on the server.".localized()
         }
         enum CollectionView {
             static let cellHeight: CGFloat = CGFloat(180)

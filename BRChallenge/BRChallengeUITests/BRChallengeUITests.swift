@@ -24,9 +24,9 @@ class BRChallengeUITests: XCTestCase {
 
     func testLunchTabTapped() {
         app.tabBars.buttons["Lunch"].tap()
-        let lunchTymeNavigationBar = app.navigationBars["Lunch Tyme"]
+        let lunchTymeNavigationBar = app.navigationBars["Lunch Time"]
         
-        XCTAssert(lunchTymeNavigationBar.staticTexts["Lunch Tyme"].exists)
+        XCTAssert(lunchTymeNavigationBar.staticTexts["Lunch Time"].exists)
         XCTAssert(lunchTymeNavigationBar.children(matching: .button).element.exists)
     }
     
@@ -51,8 +51,8 @@ class BRChallengeUITests: XCTestCase {
     
     func testRestaurantDetailsBackButton() {
         app.collectionViews.children(matching: .cell).element(boundBy: 0).otherElements.containing(.image, identifier:"cellGradientBackground").children(matching: .other).element.children(matching: .other).element.tap()
-        app.navigationBars["Details"].buttons["Lunch Tyme"].tap()
+        app.navigationBars["Details"].buttons["Lunch Time"].tap()
         
-        XCTAssert(app.navigationBars["Lunch Tyme"].staticTexts["Lunch Tyme"].exists)
+        XCTAssert(app.navigationBars["Lunch Time"].staticTexts["Lunch Time"].exists)
     }
 }

@@ -31,21 +31,31 @@ protocol InternetsNavigationDelegate: AnyObject {
 
 class InternetsNavigationController: BRNavigationController {
 
-    public weak var internetsNavigationDelegate: InternetsNavigationDelegate?
+    // MARK: - Properties
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        self.internetsNavigationDelegate = viewController as? InternetsNavigationDelegate
-        
+    public weak var internetsNavigationDelegate: InternetsNavigationDelegate?
+    public var backBarItem: UIBarButtonItem?
+    public var forwardBarItem: UIBarButtonItem?
+    public var refreshBarItem: UIBarButtonItem?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        internetsNavigationBarDefaultState()
+    }
+    
+    private func internetsNavigationBarDefaultState() {
         let backImage = #imageLiteral(resourceName: "ic_webBack")
         let reloadImage = #imageLiteral(resourceName: "ic_webRefresh")
         let forwardImage = #imageLiteral(resourceName: "ic_webForward")
 
-        let back = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
-        let refresh = UIBarButtonItem(image: reloadImage, style: .plain, target: self, action: #selector(reloadAction))
-        let forward = UIBarButtonItem(image: forwardImage, style: .plain, target: self, action: #selector(forwardAction))
-        
-        viewController.navigationItem.leftBarButtonItems = [back, refresh, forward]
+        backBarItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
+        backBarItem!.isEnabled = false
+        refreshBarItem = UIBarButtonItem(image: reloadImage, style: .plain, target: self, action: #selector(reloadAction))
+        forwardBarItem = UIBarButtonItem(image: forwardImage, style: .plain, target: self, action: #selector(forwardAction))
+        forwardBarItem!.isEnabled = false
     }
+    
+    // MARK: - Actions
     
     @objc func backAction() {
         internetsNavigationDelegate?.didTapBackButton(self)

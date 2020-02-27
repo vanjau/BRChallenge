@@ -13,7 +13,7 @@ class RestaurantDetailsViewController: UIViewController {
     // MARK: - Properties
 
     @IBOutlet weak var detailsTableView: UITableView!
-    fileprivate var restaurant: Restaurant?
+    private var restaurant: Restaurant?
     
     // MARK: - Init
     
@@ -102,9 +102,9 @@ extension RestaurantDetailsViewController: NavigationRightButtonDelegate {
 
 extension RestaurantDetailsViewController {
     
-    fileprivate enum LocalConstants {
+    private enum LocalConstants {
         enum Strings {
-            static let vcTitle = "Details"
+            static let vcTitle = "Details".localized()
         }
         enum Numbers {
             static let numberOfCells = 3
