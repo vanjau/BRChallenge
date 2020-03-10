@@ -1,2 +1,2 @@
 # BRChallenge
-Bottle Rocket iOS Engineering Test
+iOS Engineering Test
